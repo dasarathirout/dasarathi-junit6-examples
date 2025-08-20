@@ -1,6 +1,6 @@
-## dasarathi-junit6-examples
+# dasarathi-junit6-examples
 
-#### Run Maven Command To Execute Tests
+### Run Maven Command To Execute Tests
 
 - All Test
 ``` 
