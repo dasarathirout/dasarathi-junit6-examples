@@ -3,10 +3,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.rout.dasarathi</groupId>
-    <artifactId>dasarathi-junit6-examples</artifactId>
+    <artifactId>junit6-examples</artifactId>
     <version>v1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>dasarathi-junit6-examples</name>
+    <name>junit6-examples</name>
     <url>https://github.com/dasarathirout/dasarathi-junit6-examples.git</url>
 
     <modules>
