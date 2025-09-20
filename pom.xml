@@ -1,30 +1,34 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <!-- ======================================================== -->
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.rout.dasarathi</groupId>
     <artifactId>junit6-examples</artifactId>
     <version>v1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>junit6-examples</name>
-    <url>https://github.com/dasarathirout/dasarathi-junit6-examples.git</url>
-
+    <name>junit5-examples</name>
+    <url>https://github.com/dasarathirout/dasarathi-junit5-examples.git</url>
+    <!-- ======================================================== -->
     <modules>
         <module>calculator</module>
         <module>rectangle</module>
     </modules>
-
+    <!-- ======================================================== -->
     <properties>
-        <maven.compiler.source>24</maven.compiler.source>
-        <maven.compiler.target>24</maven.compiler.target>
+        <!-- Updated to a stable LTS version of Java -->
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
+        <aspectj.version>1.9.24</aspectj.version>
+        <allure.bom.version>2.30.0</allure.bom.version>
+        <allure.maven.version>2.16.1</allure.maven.version>
         <tngtech.archunit.version>1.4.1</tngtech.archunit.version>
-        <junit6.jupiter.version>6.0.0-M2</junit6.jupiter.version>
-        <maven.surefire.version>3.5.3</maven.surefire.version>
+        <junit.jupiter.version>6.0.0-RC3</junit.jupiter.version> <!-- 5.13.4 , 6.0.0-RC3 -->
+        <maven.surefire.version>3.5.4</maven.surefire.version>
         <maven.compiler.version>3.14.0</maven.compiler.version>
     </properties>
-
+    <!-- ======================================================== -->
     <dependencies>
         <dependency>
             <groupId>com.tngtech.archunit</groupId>
@@ -34,10 +38,15 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>${junit6.jupiter.version}</version>
+            <version>${junit.jupiter.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.jupiter.version}</version>
         </dependency>
     </dependencies>
-
+    <!-- ======================================================== -->
     <build>
         <plugins>
             <plugin>
@@ -53,10 +62,56 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven.surefire.version}</version>
+                <configuration>
+                    <testFailureIgnore>true</testFailureIgnore>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>${allure.maven.version}</version>
+                <configuration>
+                    <reportDirectory>${project.build.directory}/allure-report</reportDirectory>
+                    <resultsDirectory>${project.basedir}/allure-results</resultsDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>allure-report</id>
+                        <phase>site</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
-
+    <!-- ======================================================== -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-bom</artifactId>
+                <version>${allure.bom.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-junit5</artifactId>
+                <version>${allure.bom.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <!-- ======================================================== -->
     <repositories>
         <repository>
             <id>maven-repo</id>
@@ -67,5 +122,5 @@
             <url>https://maven.google.com</url>
         </repository>
     </repositories>
-
+    <!-- ======================================================== -->
 </project>

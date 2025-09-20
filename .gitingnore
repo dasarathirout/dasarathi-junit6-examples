@@ -1,0 +1,4 @@
+./oca
+**/target
+**/.allure
+**/allure-results/**

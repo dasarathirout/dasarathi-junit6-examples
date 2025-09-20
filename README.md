@@ -26,3 +26,6 @@ mvn test -Dgroups=INTEGRATION
 ```
 mvn test -Dgroups=REGRESSION
 ```
+mvn clean test
+mvn allure:report
+mvn allure:serve
