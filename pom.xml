@@ -23,6 +23,7 @@
         <aspectj.version>1.9.24</aspectj.version>
         <allure.bom.version>2.30.0</allure.bom.version>
         <allure.maven.version>2.16.1</allure.maven.version>
+        <pmd.maven.version>3.27.0</pmd.maven.version>
         <tngtech.archunit.version>1.4.1</tngtech.archunit.version>
         <junit.jupiter.version>6.0.0-RC3</junit.jupiter.version> <!-- 5.13.4 , 6.0.0-RC3 -->
         <maven.surefire.version>3.5.4</maven.surefire.version>
@@ -83,6 +84,31 @@
                         <phase>site</phase>
                         <goals>
                             <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>${pmd.maven.version}</version>
+                <configuration>
+                    <rulesets>
+                        <ruleset>rulesets/java/bestpractices.xml</ruleset>
+                        <ruleset>rulesets/java/codestyle.xml</ruleset>
+                        <ruleset>rulesets/java/design.xml</ruleset>
+                        <ruleset>rulesets/java/documentation.xml</ruleset>
+                        <ruleset>rulesets/java/errorprone.xml</ruleset>
+                        <ruleset>rulesets/java/multithreading.xml</ruleset>
+                        <ruleset>rulesets/java/performance.xml</ruleset>
+                        <ruleset>rulesets/java/security.xml</ruleset>
+                    </rulesets>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>pmd</goal>
+                            <goal>cpd</goal>
                         </goals>
                     </execution>
                 </executions>

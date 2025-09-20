@@ -25,5 +25,5 @@ java/build/**
 **/target/*
 **/.allure/*
 **/allure-results/*
-/allure-results/
-/allure-report/
+allure-results/
+allure-report/

@@ -29,3 +29,6 @@ mvn test -Dgroups=REGRESSION
 mvn clean test
 mvn allure:report
 mvn allure:serve
+
+
+mvn clean pmd:aggregate-pmd pmd:aggregate-cpd
